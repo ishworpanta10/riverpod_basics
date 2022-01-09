@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_demo/providers/increment_counter.dart';
 import 'package:riverpod_demo/providers/provider_observer.dart';
 import 'package:riverpod_demo/providers/providers.dart';
 
@@ -56,15 +55,22 @@ class HomePage extends ConsumerWidget {
         //       error: (err, st) => Text('Error: $err, $st'),
         //       loading: () => const CircularProgressIndicator(),
         //     ),
+        /// state notifier provider
+        // child: Text(
+        //   ref.watch(incrementCounterStateNotifierProvider).toString(),
+        // ),
+
+        /// change notifier provider
         child: Text(
-          ref.watch(incrementCounterStateNotifierProvider).toString(),
+          ref.watch(incrementCounterChangeNotifierProvider).initialCount.toString(),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // ref.read(numberStateProvider.state).state++;
           // ref.refresh(numberFutureProvider);
-          ref.read<IncrementCounter>(incrementCounterStateNotifierProvider.notifier).changeState(80);
+          // ref.read<IncrementCounterStateProvider>(incrementCounterStateNotifierProvider.notifier).changeState(80);
+          ref.read(incrementCounterChangeNotifierProvider).incrementCounter();
         },
         child: const Icon(Icons.add),
       ),
