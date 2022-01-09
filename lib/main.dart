@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_demo/providers/increment_counter.dart';
 import 'package:riverpod_demo/providers/provider_observer.dart';
 import 'package:riverpod_demo/providers/providers.dart';
 
@@ -41,18 +42,29 @@ class HomePage extends ConsumerWidget {
         title: const Text('Home'),
       ),
       body: Center(
-        //build method called every time when fab is pressed
+        ///build method called every time when fab is pressed
         // child: Text("Number is ${ref.watch(numberStateProvider)}"),
-        //build method does not called every time when fab is pressed
-        child: Consumer(
-          builder: (context, ref, child) {
-            return Text("Number is ${ref.watch(numberStateProvider)}");
-          },
+        ///build method does not called every time when fab is pressed
+        // child: Consumer(
+        //   builder: (context, ref, child) {
+        //     return Text("Number is ${ref.watch(numberStateProvider)}");
+        //   },
+        // ),
+        ///future provider
+        // child: ref.watch(numberFutureProvider).whenOrNull(
+        //       data: (data) => Text('Data :$data'),
+        //       error: (err, st) => Text('Error: $err, $st'),
+        //       loading: () => const CircularProgressIndicator(),
+        //     ),
+        child: Text(
+          ref.watch(incrementCounterStateNotifierProvider).toString(),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          ref.read(numberStateProvider.state).state++;
+          // ref.read(numberStateProvider.state).state++;
+          // ref.refresh(numberFutureProvider);
+          ref.read<IncrementCounter>(incrementCounterStateNotifierProvider.notifier).changeState(80);
         },
         child: const Icon(Icons.add),
       ),
