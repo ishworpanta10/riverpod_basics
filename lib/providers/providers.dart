@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_demo/providers/clock_state_notifier.dart';
 
 import 'increment_change_notifier_providers.dart';
 import 'increment_state_notifer_counter.dart';
@@ -38,3 +39,8 @@ final incrementCounterChangeNotifierProvider = ChangeNotifierProvider<IncrementC
     return IncrementCounterNotifierProvider();
   },
 );
+
+// clock state notifier
+final clockStateNotifierProvider = StateNotifierProvider<ClockStateNotifier, DateTime>((ref) {
+  return ClockStateNotifier();
+});

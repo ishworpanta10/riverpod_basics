@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:riverpod_demo/providers/increment_change_notifier_providers.dart';
 import 'package:riverpod_demo/providers/provider_observer.dart';
 import 'package:riverpod_demo/providers/providers.dart';
@@ -43,6 +44,9 @@ class HomePage extends ConsumerWidget {
       }
     });
 
+    //for timer
+    // final currentDate = ref.watch(clockStateNotifierProvider);
+    // final formattedTime = DateFormat.Hms().format(currentDate);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
@@ -68,8 +72,24 @@ class HomePage extends ConsumerWidget {
         // ),
 
         /// change notifier provider
-        child: Text(
-          ref.watch(incrementCounterChangeNotifierProvider).initialCount.toString(),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              ref.watch(incrementCounterChangeNotifierProvider).initialCount.toString(),
+              style: Theme.of(context).textTheme.headline2,
+            ),
+            Consumer(
+              builder: (context, refWatch, child) {
+                final currentDate = refWatch.watch(clockStateNotifierProvider);
+                final formattedTime = DateFormat.Hms().format(currentDate);
+                return Text(
+                  formattedTime,
+                  style: Theme.of(context).textTheme.headline4,
+                );
+              },
+            ),
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
