@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_demo/providers/increment_change_notifier_providers.dart';
 import 'package:riverpod_demo/providers/provider_observer.dart';
 import 'package:riverpod_demo/providers/providers.dart';
 
@@ -36,6 +37,12 @@ class HomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     debugPrint('=======================Build Called============================');
     // final numberState = ref.watch(numberStateProvider);
+    ref.listen<IncrementCounterNotifierProvider>(incrementCounterChangeNotifierProvider, (previous, next) {
+      if (next.initialCount == 2) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(" Value is ${next.initialCount}")));
+      }
+    });
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
