@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_demo/model/user.dart';
 import 'package:riverpod_demo/providers/clock_state_notifier.dart';
+import 'package:riverpod_demo/services/fake_services.dart';
 
 import 'increment_change_notifier_providers.dart';
 import 'increment_state_notifer_counter.dart';
@@ -43,4 +45,9 @@ final incrementCounterChangeNotifierProvider = ChangeNotifierProvider<IncrementC
 // clock state notifier
 final clockStateNotifierProvider = StateNotifierProvider<ClockStateNotifier, DateTime>((ref) {
   return ClockStateNotifier();
+});
+
+//family provider with future
+final futureProviderWithFamily = FutureProvider.family<User?, String>((ref, username) async {
+  return FakeService.fetchUserData(username: username);
 });

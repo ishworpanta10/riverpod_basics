@@ -5,6 +5,8 @@ import 'package:riverpod_demo/providers/increment_change_notifier_providers.dart
 import 'package:riverpod_demo/providers/provider_observer.dart';
 import 'package:riverpod_demo/providers/providers.dart';
 
+import 'screens/new_demo_page.dart';
+
 void main() {
   runApp(
     ProviderScope(
@@ -88,6 +90,17 @@ class HomePage extends ConsumerWidget {
                   style: Theme.of(context).textTheme.headline4,
                 );
               },
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => NewDemoPage(),
+                  ),
+                );
+              },
+              child: const Text('New Page'),
             ),
           ],
         ),
